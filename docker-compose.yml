@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+
+  webserver:
+    build: ./webserver
+    container_name: paruzorus-webserver
+    restart: always
+    environment:
+    - HOST=0.0.0.0
+    - PORT=8000
+    expose:
+      - 8000
+  
+  frontend:
+    build: ./frontend
+    container_name: paruzorus-frontend
+    restart: always
+    expose:
+      - 3000
+
+  nginx:
+    build: ./nginx
+    container_name: paruzorus-nginx
+    restart: always
+    environment:
+    - PORT=3000
+    depends_on:
+    - webserver
+    - frontend
+    ports:
+    - 1337:80
