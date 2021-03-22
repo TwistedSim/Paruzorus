@@ -1,6 +1,6 @@
 from app import app
 from app import socketio
-from app import views    # includes the routing
+from app import routes   # includes the routing
 from app import sockets  # includes the socketIO calls
 from app import config
 

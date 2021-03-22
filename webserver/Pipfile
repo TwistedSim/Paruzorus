@@ -14,6 +14,7 @@ python-levenshtein = "*"
 requests = "*"
 unidecode = "*"
 flask-cors = "*"
+dataclasses-json = "*"
 
 [dev-packages]
 
