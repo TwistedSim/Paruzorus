@@ -3,22 +3,16 @@ version: '3.7'
 services:
   
   frontend:
-
     build:
       target: build-stage
-
     volumes:
-      - ./frontend/public:/app/public
-      - ./frontend/src:/app/src
-    
+      - /app/node_modules
+      - ./frontend:/app
     command: ["yarn", "start"]
 
   webserver:
-
     volumes:
       - ./webserver:/app
-      
     environment:
       - CONFIGURATION_SETUP=dev
       - FLASK_ENV=development
-
