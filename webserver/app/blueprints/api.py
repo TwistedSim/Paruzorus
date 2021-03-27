@@ -36,7 +36,7 @@ def get_tasks(id_):
 @api_bp.route('/tasks', methods=['POST'])
 def create_task():
     global current_task_id
-    task = Task.from_json(request.data)
+    task = Task(**request.json)
     current_task_id += 1
     task.id = current_task_id
     tasks[task.id] = task
@@ -49,12 +49,13 @@ def delete_task(id_):
     del tasks[id_]
     return make_response("", 200)
 
+
 @api_bp.route('/tasks/<int:id_>', methods=['PUT'])
 def update_task(id_):
     if id_ not in tasks:
         return make_response({}, 404)
-    task = tasks[id_]
-    print(request.json, flush=True)
-    task = replace(task, **request.json)
-    print(task, flush=True)
-    return task.to_dict(), 201, {'Access-Control-Allow-Origin': '*'} 
+    tasks[id_] = replace(tasks[id_], **request.json)
+    return tasks[id_].to_dict()
+    
+      
+      

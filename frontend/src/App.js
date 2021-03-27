@@ -32,8 +32,7 @@ function App() {
   const addTask = async (task) => {
     const res = await fetch("http://localhost:1337/api/tasks", {
       method: "POST",
-      mode: "cors",
-      header: {
+      headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(task),
@@ -57,18 +56,17 @@ function App() {
     const updatedTask = {  ...taskToToggle, reminder: !taskToToggle.reminder  };
     const res = await fetch(`http://localhost:1337/api/tasks/${id}`, {
       method: "PUT",
-      mode: "cors",
-      header: {
+      headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedTask),
     });
     console.log(JSON.stringify(updatedTask));
     const data = await res.json();
-
+    
     setTasks(
       tasks.map((task) =>
-        task.id == id ? { ...task, reminder: !data.reminder } : task
+        task.id == id ? { ...task, reminder: data.reminder } : task
       )
     );
   };
