@@ -2,9 +2,9 @@ version: '3.7'
 
 services:
   
-  webserver:
-    build: ./webserver
-    container_name: paruzorus-webserver
+  backend:
+    build: ./backend
+    container_name: paruzorus-backend
     restart: always
     networks:
       - app-network
@@ -21,9 +21,15 @@ services:
       - 127.0.0.1:3000:3000
   
   proxy:
-    build: ./nginx
+    image: nginx:latest
     container_name: paruzorus-proxy
-    restart: always
+    restart: unless-stopped
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./certbot/conf:/etc/letsencrypt
+    depends_on: 
+      - frontend
+      - backend
     networks:
       - app-network
 

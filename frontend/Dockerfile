@@ -12,7 +12,7 @@ COPY --from=install-stage /app/node_modules ./
 RUN yarn build
 
 FROM nginx:stable-alpine
-COPY --from=build-stage /app/build /var/paruzorus/www/
+COPY --from=build-stage /app/build /var/www/html
 RUN rm /etc/nginx/conf.d/default.conf
 COPY ./nginx.conf /etc/nginx/conf.d
 CMD ["nginx", "-g", "daemon off;"]

@@ -10,9 +10,9 @@ services:
       - ./frontend:/app:ro
     command: ["yarn", "start"]
 
-  webserver:
+  backend:
     volumes:
-      - ./webserver:/app
+      - ./backend:/app
     environment:
       - FLASK_ENV=development
 
