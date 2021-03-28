@@ -1,27 +1,32 @@
 version: '3.7'
 
 services:
-
+  
   webserver:
     build: ./webserver
     container_name: paruzorus-webserver
     restart: always
+    networks:
+      - app-network
     ports:
-      - 8000:8000
+      - 127.0.0.1:8000:8000
   
   frontend:
     build: ./frontend
     container_name: paruzorus-frontend
-    ports:
-      - 3000:3000
     restart: always
-
-  nginx:
+    networks:
+      - app-network
+    ports:
+      - 127.0.0.1:3000:3000
+  
+  proxy:
     build: ./nginx
-    container_name: paruzorus-nginx
+    container_name: paruzorus-proxy
     restart: always
-    depends_on:
-    - webserver
-    - frontend
-    ports:
-    - 1337:80
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

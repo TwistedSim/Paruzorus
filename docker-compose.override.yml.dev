@@ -4,15 +4,19 @@ services:
   
   frontend:
     build:
-      target: build-stage
+      target: install-stage
     volumes:
       - /app/node_modules
-      - ./frontend:/app
+      - ./frontend:/app:ro
     command: ["yarn", "start"]
 
   webserver:
     volumes:
       - ./webserver:/app
     environment:
-      - CONFIGURATION_SETUP=dev
       - FLASK_ENV=development
+
+  proxy:
+    ports:
+    - 127.0.0.1:80:80
+    - 127.0.0.1:443:443

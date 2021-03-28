@@ -26,12 +26,12 @@ class TestingConfig(Config):
 
 
 config = {
-    'dev': DevelopmentConfig,
-    'prod': ProductionConfig,
-    'test': TestingConfig,
+    'development': DevelopmentConfig,
+    'production': ProductionConfig,
+    'testing': TestingConfig,
 }
 
 
-environment_configuration = os.environ.get('CONFIGURATION_SETUP', 'prod')
-print(f'Configuration environment: {environment_configuration}')
+environment_configuration = os.environ.get('FLASK_ENV', 'production')
+print(f'Configuration environment: {environment_configuration}', flush=True)
 app.config.from_object(config[environment_configuration])
