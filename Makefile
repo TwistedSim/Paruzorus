@@ -17,8 +17,6 @@ stop:
 cert_generate_dummy: cert_clean
 	mkdir -p certbot/conf/live/paruzorus.ddns.net
 	openssl req -x509 -nodes -newkey rsa:4096 -days 1 -keyout 'certbot/conf/live/paruzorus.ddns.net/privkey.pem' -out 'certbot/conf/live/paruzorus.ddns.net/fullchain.pem' -subj '/CN=localhost'
-	curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf > "certbot/conf/options-ssl-nginx.conf"
-	curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem > "certbot/conf/ssl-dhparams.pem"
 
 cert_clean:
 	rm -Rf certbot/conf/live
