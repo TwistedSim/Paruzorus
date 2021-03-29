@@ -1,4 +1,3 @@
-
 build:
 	docker-compose -f docker-compose.yml -f docker-compose.override.yml.prod build
 
@@ -29,3 +28,9 @@ cert_generate: cert_clean
 	
 cert_renew:
 	docker-compose -f certbot/docker-compose.yml run --rm --entrypoint "certbot renew" certbot
+
+frontend_shell:
+	docker-compose exec frontend sh
+
+backend_shell:
+	docker-compose exec backend sh
