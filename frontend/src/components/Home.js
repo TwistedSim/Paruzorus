@@ -7,10 +7,7 @@ const Home = () => {
     <div className="container">
       <img src={logo} className="center" alt="logo" />
       <Link to="/quiz" className="btn btn-block center">
-        Quiz
-      </Link>
-      <Link to="/taskmanager" className="btn btn-block center">
-        Task Manager
+        Start Quiz
       </Link>
     </div>
   );

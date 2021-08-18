@@ -1,0 +1,83 @@
+[tool.pdm]
+includes = []
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "aiohttp-devtools<1.0.0,>=0.13.1",
+]
+test = ["pytest~=6.2", "pytest-asyncio~=0.15", "pytest-mock~=3.6"]
+
+[tool.pdm.scripts]
+start_dev_server = "adev runserver src/paruzorus"
+start_server = "python -m paruzorus.app"
+
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
+
+[project]
+
+name = "paruzorus"
+version = "0.0.1"
+description = ""
+authors = [
+    {name = "Simon Bouchard", email = "simon.bouchard23@gmail.com"},
+]
+dependencies = [
+    "aiohttp~=3.7",
+    "aiohttp-middlewares~=1.1",
+    "aiohttp-devtools~=0.13",
+    "Levenshtein~=0.12",
+    "aiohttp-session~=2.9",
+    "cryptography~=3.4",
+]
+
+requires-python = ">=3.8"
+license = "Proprietary"
+
+[project.urls]
+homepage = ""
+
+
+[project.optional-dependencies]
+[tool.black]
+line-length = 120
+
+[tool.isort]
+line_length = 100
+profile = "black"
+src_paths = ["src"]
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if False:",
+  "^\\s*\\.{3}$",
+  "if __name__ == .__main__.:",
+  "def __str__",
+  "def __repr__",
+]
+ignore_errors = true
+
+[tool.pytest.ini_options]
+addopts = ["-vv"]
+
+[tool.mypy]
+check_untyped_defs = true
+ignore_errors = true
+ignore_missing_imports = true
+namespace_packages = true
+pretty = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+ignore_missing_imports = false
+ignore_errors = false
+module = "paruzorus.*"

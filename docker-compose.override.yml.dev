@@ -12,9 +12,8 @@ services:
 
   backend:
     volumes:
-      - ./backend:/app
-    environment:
-      - FLASK_ENV=development
+      - ./backend/src:/app/src
+    command: ["pdm", "run", "start_dev_server"]
 
   proxy:
     ports:

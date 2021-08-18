@@ -1,38 +1,56 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect } from "react";
 
 const QuestionCard = ({
   question,
-  answers,
-  callback,
-  userAnswer,
-  questionNr,
-  totalQuestions,
-}) => (
-  <div>
-    <p className="number">
-      Question: {questionNr} / {totalQuestions}
-    </p>
-    <p dangerouslySetInnerHTML={{ __html: question }}></p>
-    <div>
-      {answers.map((answer) => (
-        <div key={answer}>
-          <button disabled={!!userAnswer} value={answer} onClick={callback}>
-            <span dangerouslySetInnerHTML={{ __html: answer }} />
-          </button>
-        </div>
-      ))}
-    </div>
-  </div>
-);
+  checkAnswer,
+  answer,
+  setAnswer,
+  answerSent,
+  nextQuestion,
+}) => {
+  useEffect(() => {
+    const listener = (event) => {
+      if (event.key === "Enter" || event.key === "NumpadEnter") {
+        event.preventDefault();
+        handleButtonClick();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, [answerSent, answer]);
 
-QuestionCard.propTypes = {
-  question: PropTypes.string,
-  answers: PropTypes.array,
-  callback: PropTypes.any,
-  userAnswer: PropTypes.any,
-  questionNr: PropTypes.number,
-  totalQuestions: PropTypes.number,
+  const handleButtonClick = () => {
+    if (answerSent) nextQuestion();
+    else checkAnswer(answer);
+  };
+
+  const answerChanged = (e) => {
+    setAnswer(e.target.value);
+  };
+
+  return (
+    <div>
+      <img src={question} className="center" />
+      <br />
+      <input
+        type="text"
+        value={answer}
+        className="center"
+        disabled={!!answerSent}
+        placeholder="Enter your answer..."
+        onChange={answerChanged}
+        autoFocus
+      />
+      <input
+        type="button"
+        value={answerSent ? "Next" : "Send"}
+        className="center"
+        onClick={handleButtonClick}
+      />
+    </div>
+  );
 };
 
 export default QuestionCard;

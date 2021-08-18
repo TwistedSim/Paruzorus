@@ -8,7 +8,7 @@ start: build
 	docker-compose -f docker-compose.yml -f docker-compose.override.yml.prod up -d
 
 start_dev: build_dev
-	docker-compose -f docker-compose.yml -f docker-compose.override.yml.dev up -d
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml.dev up
 
 stop:
 	docker-compose stop
