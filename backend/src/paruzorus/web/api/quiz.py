@@ -56,7 +56,7 @@ async def validate_answer(request: web.Request):
     session["current_answer"] = None
     success = controller.validate_answer(data["answer"], current_answer)
     session["score"] += 1 if success else -1
-    session["score"] = max(session['score'], 0)
+    session["score"] = max(session["score"], 0)
     session["question_answered"] += 1
 
     return web.json_response(

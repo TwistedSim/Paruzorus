@@ -23,9 +23,9 @@ class MacAulayProvider(Provider):
                 picture_info = random.choice(response["results"]["content"])
                 answer = picture_info["subjectData"][0]["comName"]
                 picture_url = picture_info["previewUrl"]
-        
-        answer = re.sub(r'\s\(.*\)', '', answer)
-        
+
+        answer = re.sub(r"\s\(.*\)", "", answer)
+
         return Question(
             picture_url=picture_url,
             answer=answer,
