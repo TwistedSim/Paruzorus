@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 
 const QuestionCard = ({
   question,
@@ -51,6 +52,15 @@ const QuestionCard = ({
       />
     </div>
   );
+};
+
+QuestionCard.propTypes = {
+  question: PropTypes.string,
+  checkAnswer: PropTypes.bool,
+  answer: PropTypes.string,
+  setAnswer: PropTypes.func,
+  answerSent: PropTypes.bool,
+  nextQuestion: PropTypes.func,
 };
 
 export default QuestionCard;

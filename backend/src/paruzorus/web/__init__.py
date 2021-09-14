@@ -9,7 +9,7 @@ from cryptography import fernet
 
 from paruzorus.controllers.quiz_controller import QuizController
 from paruzorus.providers.macaulay import MacAulayProvider
-from paruzorus.species.warblers import TARGET_SPECIES
+from paruzorus.species.sandpipers import TARGET_SPECIES
 from paruzorus.web.api import create_api
 
 logger = getLogger(__name__)

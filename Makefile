@@ -5,7 +5,7 @@ build_dev:
 	docker-compose -f docker-compose.yml -f docker-compose.override.yml.dev build
 
 start: build
-	docker-compose -f docker-compose.yml -f docker-compose.override.yml.prod up -d
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml.prod up
 
 start_dev: build_dev
 	docker-compose -f docker-compose.yml -f docker-compose.override.yml.dev up
@@ -25,6 +25,8 @@ cert_clean:
 cert_generate: cert_clean
 	docker-compose -f certbot/docker-compose.yml run --rm certbot
 	docker-compose -f certbot/docker-compose.yml stop
+	curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf > certbot/conf/options-ssl-nginx.conf
+	curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem > "certbot/conf/ssl-dhparams.pem"
 	
 cert_renew:
 	docker-compose -f certbot/docker-compose.yml run --rm --entrypoint "certbot renew" certbot

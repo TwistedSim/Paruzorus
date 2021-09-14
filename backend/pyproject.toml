@@ -9,7 +9,7 @@ test = ["pytest~=6.2", "pytest-asyncio~=0.15", "pytest-mock~=3.6"]
 
 [tool.pdm.scripts]
 start_dev_server = "adev runserver src/paruzorus"
-start_server = "python -m paruzorus.app"
+start_server = "python -m paruzorus.app --host 0.0.0.0 --port 8000"
 
 [build-system]
 requires = ["pdm-pep517"]
